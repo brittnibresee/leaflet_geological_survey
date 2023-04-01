@@ -6,7 +6,7 @@ d3.json(DATA_URL).then(function(data){
       center: [38.89511, -100.03637],
       zoom: 5
     });
-  
+
     console.log(data);
 
     // Add layer to map
@@ -19,6 +19,7 @@ d3.json(DATA_URL).then(function(data){
         var coords = feature.geometry.coordinates;
         var mag = feature.properties.mag;
         var depth = coords[2];
+        var location = feature.properties.place;
         var color = depth > 90 ? "#800026" :
                     depth > 70 ? "#BD0026" :
                     depth > 50 ? "#E31A1C" :
@@ -33,7 +34,9 @@ d3.json(DATA_URL).then(function(data){
             color: "green",
             weight: 0.5
         });
-        marker.bindPopup("<h3>Magnitude: " + mag + "</h3><h3>Depth: " + depth + "</h3>").addTo(earth_map);
+        marker.bindPopup("<h3>Magnitude: " + mag + "</h3><h3>Depth: " + 
+        depth + "</h3>" + "<h3>Location: " + location + "</h3>").addTo(earth_map);
+
     });
 
     // Add legend to map
@@ -48,16 +51,23 @@ d3.json(DATA_URL).then(function(data){
         // Look through and generate label
         for(var i =0; i < depths.length; i++) {
             div.innerHTML +=
-            '<i style="background:' + getColor(depths[i] + 1) + '"></i> ' +
-            depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
-
+            '<div style="background-color:' 
+            + getColor(depths[i] + 1) + '">' +depths[i] + (depths[i + 1] ? '&ndash;' 
+            + depths[i + 1] + '<br>' : '+') + '</div>';
         }
 
         return div;
     };
 
     legend.addTo(earth_map);
-
+    plate_json = null
+    plate_URL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
+    d3.json(plate_URL).then(function(data){
+        L.geoJson(data, {
+            color: "blue",
+            weight: 2,
+        }).addTo(earth_map);
+        });
 });
 
 // Function to get color based on depth
