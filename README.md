@@ -23,6 +23,3 @@ This project uses Leaflet.js to display geological survey data on a map. The dat
 - Geological survey data provided by XYZ API
 - Leaflet.js documentation: https://leafletjs.com
 - D3.js documentation: https://d3js.org
-
-## License
-This project is licensed under the MIT License.
