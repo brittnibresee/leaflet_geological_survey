@@ -64,20 +64,20 @@ d3.json(DATA_URL).then(function(data){
     plate_URL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
     d3.json(plate_URL).then(function(data){
         L.geoJson(data, {
-            color: "blue",
+            color: "red",
             weight: 2,
         }).addTo(earth_map);
         });
 });
-
+  
 // Function to get color based on depth
-function getColor(d) {
-    return d > 90 ? "#800026" :
-           d > 70 ? "#BD0026" :
-           d > 50 ? "#E31A1C" :
-           d > 30 ? "#FC4E2A" :
-           d > 10 ? "#FD8D3C" :
-                    "#FEB24C";
-}
+//function getColor(d) {
+    //return d > 90 ? "#800026" :
+           //d > 70 ? "#BD0026" :
+           //d > 50 ? "#E31A1C" :
+           //d > 30 ? "#FC4E2A" :
+           //d > 10 ? "#FD8D3C" :
+                    //"#FEB24C";
+//}
 
 
