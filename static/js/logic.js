@@ -46,13 +46,13 @@ d3.json(DATA_URL).then(function(data){
 
         var div = L.DomUtil.create('div', 'info legend'),
         depths = [-10, 10, 30, 50, 70, 90],
-        labels = [];
+        labels = ["#FEB24C", "#FD8D3C", "#FC4E2A", "#E31A1C", "#BD0026", "#800026"];
 
         // Look through and generate label
         for(var i =0; i < depths.length; i++) {
             div.innerHTML +=
             '<div style="background-color:' 
-            + getColor(depths[i] + 1) + '">' +depths[i] + (depths[i + 1] ? '&ndash;' 
+            + labels[i] + '">' +depths[i] + (depths[i + 1] ? '&ndash;' 
             + depths[i + 1] + '<br>' : '+') + '</div>';
         }
 
@@ -61,7 +61,7 @@ d3.json(DATA_URL).then(function(data){
 
     legend.addTo(earth_map);
     plate_json = null
-    plate_URL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
+    plate_URL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
     d3.json(plate_URL).then(function(data){
         L.geoJson(data, {
             color: "red",
